@@ -1,7 +1,9 @@
 const express = require("express")
 const ejs = require("ejs")
 const path = require("path")
+const { connectDB } = require("./db")
 
+connectDB()
 const app = express()
 
 /* Settings */
