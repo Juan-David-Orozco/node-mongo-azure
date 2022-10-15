@@ -2,6 +2,7 @@ const express = require("express")
 const ejs = require("ejs")
 const path = require("path")
 const { connectDB } = require("./db")
+const User = require("./models/User")
 
 connectDB()
 const app = express()
@@ -13,7 +14,10 @@ app.set('views', path.join(__dirname, 'views'))
 /* Routes */
 //app.get('/', (req, res) => res.send("Hello world"))
 
-app.get('/api/users', (req, res) => res.json([{name: 'ryan'}, {name: 'joe'}]))
+app.get('/api/users', async (req, res) => {
+  const users = await User.find()
+  res.json(users)
+})
 
 app.get('/profile', (req, res) => {
   res.render('profile', {name: 'juan', age: 29})
